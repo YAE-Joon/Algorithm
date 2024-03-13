@@ -20,8 +20,7 @@ class Solution {
         }
         Arrays.sort(answer);
         if(answer.length==0){
-            answer= new int[1];
-            answer[0]=-1;
+            answer= new int[]{-1};
         }
         return answer;
     }
