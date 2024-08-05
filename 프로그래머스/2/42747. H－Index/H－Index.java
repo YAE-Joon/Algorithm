@@ -1,20 +1,21 @@
+import java.util.*;
+
 class Solution {
     public int solution(int[] citations) {
         int answer = 0;
-        int count = 0;
-        int n =1;
-        for(int l=0; l<citations.length;l++){
-            for(int i=0; i<citations.length;i++){
-                if(citations[i]>=n){
-                 count++;
-                }       
+        Arrays.sort(citations);   
+        
+        for(int i =0; i<citations.length;i++){
+            
+            if(citations.length-i-1>=citations[i]){
+                answer = citations.length-i-1;
+                System.out.println(answer);
             }
-            if(count>=n){
-                answer = n;
-                }   
-            n++;
-            count=0;
         }
+        if(citations.length<citations[0]){
+            answer = citations.length;
+        }
+            
         return answer;
     }
 }
