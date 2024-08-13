@@ -1,25 +1,44 @@
+
+import java.util.*;
+
 class Solution {
-    static boolean[] visited;
-    static int answer = 0;
-    
-    public int solution(int k, int[][] dungeons) {
-        visited = new boolean[dungeons.length];
-        DFS(0,k,dungeons);
-        return answer;
-    }
+
  
-    static void DFS(int depth, int remain, int[][] dungeons){
-        for(int i =0; i<dungeons.length;i++){
-            if(visited[i]||remain -dungeons[i][0]<0){
-                continue;
-            }
-            visited[i]=true;
-            int cost = dungeons[i][1];
-            DFS(depth+1,remain-cost,dungeons);
-            visited[i]=false;
+    public int solution(int k, int[][] dungeons) {
+      int answer = -1;
+      List<Integer[]> list = new ArrayList<>();
+
+      List<Integer> answerList = new ArrayList<>();
+      for(int[] a :dungeons){
+        Integer[] b = new Integer[2];
+        b[0] =a[0];
+        b[1] =a[1];
+        list.add(b);
+      }
+      adventure(0,list,k,answerList);
+      for(int max : answerList){
+        if(max>answer){
+          answer = max;
         }
-    answer = Math.max(answer, depth);
+      }
+      return answer;
     }
-   
-    
-}
+
+    public void adventure(int answer, List<Integer[]> list, int k,List<Integer> answerlist){
+
+      for(int i =0 ; i<list.size(); i++){
+       int answer1 = answer;
+        if(list.get(i)[0]<=k){
+          int p = k - list.get(i)[1];
+          List<Integer[]> newList = new ArrayList<>(list);
+          newList.remove(list.get(i));
+          answer1++;
+
+          adventure(answer1,newList,p,answerlist);
+
+        }
+
+      }
+      answerlist.add(answer);
+    }
+  }
