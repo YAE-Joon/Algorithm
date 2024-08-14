@@ -9,9 +9,9 @@ class Solution {
     road = new boolean[wires.length];
     minMax = n-1;
     for(int i=0; i<wires.length;i++){
-      road[i]=true; count =0;
-      trueCount =0;
-      dfs(wires,1,0);
+      road[i]=true;
+      count =0;
+      dfs(wires,1);
       int i1 = n - count-1;
       int i2 = i1- count-1;
       if(i2<0){
@@ -28,7 +28,7 @@ class Solution {
   }
 
 
-  public void dfs(int[][] wires,int pre, int trueCounting){
+  public void dfs(int[][] wires,int pre){
 
     for(int l =0; l<wires.length;l++){
 
@@ -44,14 +44,11 @@ class Solution {
 
       if(!road[l]&&pre==wires[l][0]){
         road[l]=true;
-        trueCounting++;
-        dfs(wires,wires[l][1],trueCounting);
+        dfs(wires,wires[l][1]);
       }else if(!road[l]&&pre==wires[l][1]){
         road[l]=true;
-        trueCounting++;
-        dfs(wires,wires[l][0],trueCounting);
+        dfs(wires,wires[l][0]);
       }
     }
   }
-
 }
