@@ -27,6 +27,7 @@ class Solution {
         toDolist.push(point);
         
         
+        int[][] condition = {{1,0},{0,1},{-1,0},{0,-1}};
         
         while(!toDolist.isEmpty()){
             
@@ -36,53 +37,35 @@ class Solution {
             int x = nextPoint[0];
             int y = nextPoint[1];
             int distance = nextPoint[2];
+
+            
             //종점이면 max와 비교
             if(x==map.length-1&&y==map[0].length-1){
                 
-                    max =distance;
+                    max=distance;
                 
                 break;
                 
             }
             
             
-            if(x-1>=0){
+            for(int[] s :condition){
                 
-                if(map[x-1][y]==1&&!isChecked[x-1][y]){
+                int nextX = x+s[0];
+                int nextY = y+s[1];
                 
-                isChecked[x-1][y] = true;
-                Integer[] nextX = new Integer[]{x-1,y,distance+1};
-                toDolist.add(nextX);
-            
-            }
-            }
-            if(y-1>=0){
-                if(map[x][y-1]==1&&!isChecked[x][y-1]){
-                isChecked[x][y-1] = true;
-                Integer[] nextY = new Integer[]{x,y-1,distance+1};
-                toDolist.add(nextY);
+                if(nextX>=0&&nextX<map.length&&nextY>=0&&nextY<map[0].length&&!isChecked[nextX][nextY]&&map[nextX][nextY]==1){
+                    isChecked[nextX][nextY]=true;
+                    toDolist.add(new Integer[]{nextX,nextY,distance+1});
                 }
-            }
-            
-             if(x+1<map.length){
-                if(map[x+1][y]==1&&!isChecked[x+1][y]){
-                isChecked[x+1][y] = true;
-                Integer[] nextX2 = new Integer[]{x+1,y,distance+1};
-                toDolist.add(nextX2);
-                }
-            }
-            
-            
-             if(y+1<map[0].length){
-                 if(map[x][y+1]==1&&!isChecked[x][y+1]){
                 
-                isChecked[x][y+1] = true;
-                Integer[] nextY2 = new Integer[]{x,y+1,distance+1};
-                toDolist.add(nextY2);
-                 }
             }
             
-        }
+            
+//            x+1y x,y+1  x-1,y x,y-1
+             
+            
         
     }
+}
 }
