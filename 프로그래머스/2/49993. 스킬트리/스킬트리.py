@@ -1,28 +1,19 @@
-from collections import deque 
-
 def solution(skill, skill_trees):
     answer = 0
-    n = list(skill)
     
-    for item in skill_trees:
-        for idx,i in enumerate(n):
-            item = item.replace(i,' '+str(idx)+' ')
+    for item in skill_trees:  
+        skill_set = list(skill)
         
-        stack=[]
-        item = item.split(' ')
-        ot = True
-        ans = -1
-        for k in item:
-            try:
-                l = int(k)
-                if ans+1==l:
-                    ans = l
-                else: 
-                    ot=False                
-                    break
-            except: continue
+        check = True
+        for i in item:
             
-        if ot :
+            if i in skill_set:
+                if i != skill_set[0]:
+                    check = False
+                    break
+                else : skill_set.pop(0)
+        
+        if check :
             answer+=1
         
     return answer
